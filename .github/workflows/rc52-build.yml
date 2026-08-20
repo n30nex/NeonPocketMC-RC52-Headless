@@ -1,4 +1,4 @@
-name: RC52 Build
+name: RC52 Headless Build
 
 on:
   workflow_dispatch:
@@ -38,8 +38,8 @@ jobs:
       fail-fast: false
       matrix:
         environment:
+          - heltec_rc52_headless_companion_radio_ble
           - heltec_rc52_companion_radio_ble
-          - heltec_rc52_companion_radio_usb
           - Heltec_t114_companion_radio_ble
 
     steps:
@@ -59,11 +59,11 @@ jobs:
         run: pio run -e ${{ matrix.environment }}
 
       - name: Create RC52 application UF2
-        if: startsWith(matrix.environment, 'heltec_rc52_companion_radio_')
+        if: matrix.environment == 'heltec_rc52_headless_companion_radio_ble'
         run: pio run -e ${{ matrix.environment }} -t create_uf2
 
       - name: Verify RC52 UF2
-        if: startsWith(matrix.environment, 'heltec_rc52_companion_radio_')
+        if: matrix.environment == 'heltec_rc52_headless_companion_radio_ble'
         shell: bash
         run: |
           out=.pio/build/${{ matrix.environment }}
@@ -79,10 +79,10 @@ jobs:
             > "$out/SHA256SUMS"
 
       - name: Upload exact RC52 application artifacts
-        if: startsWith(matrix.environment, 'heltec_rc52_companion_radio_')
+        if: matrix.environment == 'heltec_rc52_headless_companion_radio_ble'
         uses: actions/upload-artifact@v4
         with:
-          name: NeonPocketMC-RC52-${{ matrix.environment }}-${{ github.event.pull_request.head.sha || github.sha }}
+          name: NeonPocketMC-RC52-Headless-${{ github.event.pull_request.head.sha || github.sha }}
           if-no-files-found: error
           path: |
             .pio/build/${{ matrix.environment }}/firmware.uf2

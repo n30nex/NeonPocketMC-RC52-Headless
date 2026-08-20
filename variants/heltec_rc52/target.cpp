@@ -11,7 +11,9 @@ VolatileRTCClock fallback_clock;
 AutoDiscoverRTCClock rtc_clock(fallback_clock);
 EnvironmentSensorManager sensors;
 
+#ifdef DISPLAY_CLASS
 DISPLAY_CLASS display(SPI1);
+#endif
 MomentaryButton user_btn(PIN_USER_BTN, 1000, true);
 
 bool radio_init() {
