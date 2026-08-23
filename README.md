@@ -24,7 +24,7 @@ The default Bluetooth pairing PIN is **`123456`**. Because this build has no dis
 - Existing MeshCore identity, contacts, channels, preferences, bootloader, and SoftDevice are preserved by application-only UF2 updates
 - No TFT initialization, framebuffer, Web/AP, USB companion, repeater, or room-server behavior
 
-The firmware is based on the current NeonPocketMC RC52 source, including the MeshCore 1.17 RX gain correction. The TFT RC52 companion remains a separate product at [NeonPocketMC-RC52](https://github.com/n30nex/NeonPocketMC-RC52).
+The firmware is based on the current NeonPocketMC RC52 source, including the target-relevant MeshCore 1.17.1 RX, nRF52840 crypto, and entropy maintenance fixes. The TFT RC52 companion remains a separate product at [NeonPocketMC-RC52](https://github.com/n30nex/NeonPocketMC-RC52).
 
 ## Flashing
 
